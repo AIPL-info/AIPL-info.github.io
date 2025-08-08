@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIPL 2025 - International Workshop on AI for Personalized Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #1a252f;
+            --success: #2ecc71;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 70px; /* Space for fixed navbar */
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            padding: 0 20px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            padding: 0 70px;
+        }
+        
+        .nav-link {
+            display: block;
+            padding: 20px 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: #ffd700;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: #ffd700;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Header Styles */
+        header {
+            background: 
+                linear-gradient(136deg, rgba(194, 208, 222, 0.65), rgba(208, 213, 215, 0.65)),
+                url('/Users/shuning/Documents/ICWL_webset/AIPL/home1.png') center/cover;
+            color: rgb(255, 255, 255);
+            height: 500px;
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: -5px;   /* Space for fixed navbar */
+        }
+        
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.4rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .date-location {
+            background: rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-top: 1rem;
+            backdrop-filter: blur(5px);
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 3rem 0;
+            background: white;
+        }
+        
+        section:nth-child(even) {
+            background-color: #f0f7ff;
+        }
+        
+        h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--secondary);
+            display: inline-block;
+        }
+        
+        h3 {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin: 1.8rem 0 1rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        /* Topics Section - Two Column Layout */
+        .topics-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 0rem;
+        }
+        
+        .topics-column {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .topics-list {
+            padding-left: 1.5rem;
+        }
+        
+        .topics-list li {
+            margin-bottom: 0.1rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .topics-list li::before {
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Submission Guidelines */
+        .guidelines {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            margin-top: 1.5rem;
+        }
+        
+        .guidelines ul {
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .guidelines li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .highlight {
+            background-color: #e3f2fd;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .highlight-box {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 1rem 1rem;
+            margin: 1rem 0rem .5rem 0rem;
+            border-radius: 4px;
+        }
+        
+        /* Schedule */
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            box-shadow: var(--shadow);
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .schedule-table th, .schedule-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .schedule-table th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .schedule-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-primary {
+            background: var(--secondary);
+        }
+        
+        .btn-accent {
+            background: var(--accent);
+        }
+        
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+        
+        .btn-accent:hover {
+            background: #c0392b;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #bdc3c7;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 1rem;
+        }
+        
+        .footer-links a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            h1 {
+                font-size: 2.4rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .topics-container {
+                flex-direction: column;
+            }
+            
+            .committee-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-item {
+                padding: 0 8px;
+            }
+            
+            .nav-link {
+                padding: 15px 5px;
+                font-size: 1.5rem;
+            }
+        }
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.4rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .topics-container {
+                flex-direction: column;
+            }
+            
+            .committee-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-item {
+                padding: 0 8px;
+            }
+            
+            .nav-link {
+                padding: 15px 5px;
+                font-size: 1.2rem;
+            }
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .topics-container {
+                flex-direction: column;
+            }
+            
+            .committee-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-item {
+                padding: 0 8px;
+            }
+            
+            .nav-link {
+                padding: 15px 5px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-menu {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-item {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .nav-link {
+                padding: 10px;
+            }
+            
+            .date-location {
+                font-size: 0.9rem;
+                padding: 0.6rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#description" class="nav-link">Introduction</a></li>
+                <li class="nav-item"><a href="#call-for-papers" class="nav-link">Call for Papers</a></li>
+                <li class="nav-item"><a href="committee.html" class="nav-link">Committee</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>The International Workshop on AI for Personalized Learning (AIPL 2025)</h1>
+                <p class="subtitle">Advancing the future of education through artificial intelligence and personalized learning approaches</p>
+                <div class="date-location">
+                    <i class="fas fa-calendar-alt"></i> Workshop: November 30, 2025 | Conference: December 1-3, 2025 | Hong Kong
+                </div>
+               
+            </div>
+        </div>
+    </header>
+
+    <!-- Workshop Description -->
+    <section id="description">
+        <div class="container">
+            <h2>Workshop Description</h2>
+            <p>The International Workshop on AI for Personalized Learning (AIPL 2025) is dedicated to exploring the transformative impact of artificial intelligence on education, with a special focus on personalized learning. This workshop brings together researchers, educators, practitioners, and industry experts to discuss the latest advancements, practical applications, and future trends in AI-driven personalized education.</p>
+            <p>Key topics include intelligent tutoring systems, adaptive learning platforms, learner modeling, data-driven curriculum design, ethical considerations, and the integration of AI tools across diverse educational settings. By fostering interdisciplinary dialogue and sharing innovative research and real-world case studies, AIPL 2025 aims to advance the development of scalable, inclusive, and effective personalized learning solutions.</p>
+            <p>Participants are invited to contribute original research, case studies, and theoretical perspectives that highlight the opportunities and challenges of leveraging AI to tailor educational experiences to individual learners' needs, preferences, and abilities. Join us to shape the future of education through the power of artificial intelligence.</p>
+        </div>
+    </section>
+
+    <!-- Call for Papers -->
+    <section id="call-for-papers">
+        <div class="container">
+            <h2>Call for Papers</h2>
+            <p>We invite researchers, educators, practitioners, and industry experts to submit original papers to the International Workshop on AI for Personalized Learning (AIPL 2025). The workshop focuses on the latest advances, challenges, and future directions in AI-driven personalized learning, including but not limited to intelligent tutoring systems, adaptive learning platforms, learner modeling, data-driven curriculum design, ethical considerations, and the integration of AI tools in diverse educational settings.</p>
+            
+            <!-- Topics of Interest -->
+            <h3>Topics of Interest</h3>
+            <div class="highlight-box">
+                <div class="topics-container">
+                    <div class="topics-column">
+                        <ul class="topics-list">
+                            <li>Applications of AI in Education</li>
+                            <li>Assessment in e-learning</li>
+                            <li>Informal Learning in the Workplace</li>
+                            <li>Cloud-based Learning</li>
+                            <li>Computer Support for Intelligent Tutoring</li>
+                            <li>CSCL</li>
+                            <li>Deployment, Organization and Management of Learning Objects</li>
+                            <li>Design, Model and Framework of e-Learning Systems</li>
+                            <li>Digital libraries and Web corpora for e-learning</li>
+                            <li>E-Learning Metadata and Standards</li>
+                            <li>E-Learning Platforms and Tools</li>
+                            <li>Educational Technologies</li>
+                            <li>Game-based Learning and Serious Games</li>
+                            <li>Generative AI in Education</li>
+                            <li>HTML5 Web-based Learning</li>
+                            
+                        </ul>
+                    </div>
+                    <div class="topics-column">
+                        <ul class="topics-list">
+                            <li>Intelligent Learner and Group Modelling</li>
+                            <li>Intelligent Tools for Visual Learning</li>
+                            <li>Learning Analytics</li>
+                            <li>Massive Open Online Courses (MOOC)</li>
+                            <li>Mobile, Situated, and Blended Learning</li>
+                            <li>Open educational resources (OER)</li>
+                            <li>Pedagogical Issues</li>
+                            <li>Personal Learning Environments (PLE) </li>
+                            <li>Personalized and Adaptive Learning</li>
+                            <li>Security and Privacy of Web-based Learning</li>
+                            <li>Virtual environments and 3D graphics for e-learning</li>
+                            <li>Web 3.0 and Social Learning Environments</li>
+                            <li>Web-based Learning for Oriental Languages Learning</li>
+                            <li>Human Factors and Affective Computing for Learning</li>
+                            <li>Informal Learning in the Workplace</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Submission Guidelines -->
+            <h3>Submission Guidelines</h3>
+            <div class="guidelines">
+                <ul>
+                    <li>Submissions must present original research results, novel applications, or theoretical perspectives in technology-enhanced and personalized learning.</li>
+                    <li>Papers should be formatted according to the Springer LNCS Authors Guidelines: Information for Authors.</li>
+                    <li>Submission formats:
+                        <ul>
+                            <li><strong>Full Paper:</strong> 12–15 pages (including references)</li>
+                            <li><strong>Short Paper:</strong> 6–11 pages (including references)</li>
+                        </ul>
+                    </li>
+                    <li>All submissions must be in PDF format and submitted via the Submission Portal.</li>
+                    <li>The review process will be double-blind. Authors should ensure that manuscripts do not contain names, affiliations, or any information that may reveal their identity.</li>
+                </ul>
+            </div>
+            
+            <!-- Publication -->
+            <h3>Publication</h3>
+            <p>All accepted papers presented at the workshop will be published jointly with the post-conference proceedings in the Springer Lecture Notes in Computer Science (LNCS) series.</p>
+            
+            <!-- Special Opportunities -->
+            <h3>Special Opportunities</h3>
+            <div class="highlight">
+                <p>Outstanding papers will be recommended for possible publication in a special issue of:</p>
+                <ul>
+                    <li><strong>IEEE Transactions on Learning Technologies</strong> (confirmed)</li>
+                    <li><strong>Computers and Education: Artificial Intelligence</strong> (pending)</li>
+                </ul>
+                <p>Join us at AIPL 2025 to share your insights and innovations, and help shape the future of AI-powered personalized education!</p>
+            </div>
+            
+            <!-- Tentative Schedule -->
+            <h3>Tentative Schedule</h3>
+            <div class="guidelines">
+                <ul>
+                    <li><strong>Paper submission:</strong>  September 20, 2025</li>
+                    <li><strong>Notification to authors:</strong> October 20, 2025</li>
+                    <li><strong>Camera-ready submission:</strong>  October 30, 2025</li>
+                    <li><strong>Workshop Day:</strong> November 30, 2025</li>
+                    <li><strong>Main Conference:</strong> December 1-3, 2025</li>
+                </ul>
+            </div>
+      
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">AIPL 2025</div>
+                <p>The International Workshop on AI for Personalized Learning</p>
+                <p>Advancing the future of education through artificial intelligence</p>
+                
+                <div class="footer-links">
+                    <a href="#description">Introduction</a>
+                    <a href="#call-for-papers">Call for Papers</a>
+                    <a href="committee.html">Committee</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                
+                <div class="copyright">
+                    &copy; 2025 AIPL Workshop Committee. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

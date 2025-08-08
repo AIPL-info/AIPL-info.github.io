@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Committee - AIPL 2025</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 使用与主页面相同的CSS样式 */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #1a252f;
+            --success: #2ecc71;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 70px; /* Space for fixed navbar */
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            padding: 0 20px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            padding: 0 70px;
+        }
+        
+        .nav-link {
+            display: block;
+            padding: 20px 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: #ffd700;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: #ffd700;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Header Styles */
+        header {
+            background: 
+                linear-gradient(136deg, rgba(194, 208, 222, 0.65), rgba(208, 213, 215, 0.65)),
+                url('/Users/shuning/Documents/ICWL_webset/AIPL/home1.png') center/cover;
+            color: rgb(255, 255, 255);
+            height: 500px;
+            padding: 8rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: -5px;   /* Space for fixed navbar */
+        }
+        
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.4rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .date-location {
+            background: rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-top: 1rem;
+            backdrop-filter: blur(5px);
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 3rem 0;
+            background: white;
+        }
+        
+        section:nth-child(even) {
+            background-color: #f0f7ff;
+        }
+        
+        h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--secondary);
+            display: inline-block;
+        }
+        
+        h3 {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin: 1.8rem 0 1rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        /* Committee Grid */
+        .committee-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin-top: 1.5rem;
+        }
+        
+        .committee-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .committee-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .committee-card h4 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .institution {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+        }
+        
+        .role {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 10px 55px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 0rem;
+            box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-primary {
+            background: var(--secondary);
+        }
+        
+        .btn-accent {
+            background: var(--accent);
+        }
+        
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+        
+        .btn-accent:hover {
+            background: #c0392b;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #bdc3c7;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 1rem;
+        }
+        
+        .footer-links a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            h1 {
+                font-size: 2.4rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .topics-container {
+                flex-direction: column;
+            }
+            
+            .committee-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-item {
+                padding: 0 8px;
+            }
+            
+            .nav-link {
+                padding: 15px 5px;
+                font-size: 1.5rem;
+            }
+        }
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.4rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .topics-container {
+                flex-direction: column;
+            }
+            
+            .committee-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-item {
+                padding: 0 8px;
+            }
+            
+            .nav-link {
+                padding: 15px 5px;
+                font-size: 1.2rem;
+            }
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .committee-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-item {
+                padding: 0 8px;
+            }
+            
+            .nav-link {
+                padding: 15px 5px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-menu {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-item {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .nav-link {
+                padding: 10px;
+            }
+            
+            .date-location {
+                font-size: 0.9rem;
+                padding: 0.6rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Introduction</a></li>
+                <li class="nav-item"><a href="index.html#call-for-papers" class="nav-link">Call for Papers</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Committee</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>Workshop Committee</h1>
+                <p class="subtitle">Meet the experts organizing the International Workshop on AI for Personalized Learning</p>
+                <div class="date-location">
+                    <i class="fas fa-calendar-alt"></i> Workshop: November 30, 2025 | Hong Kong
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Workshop Chair -->
+    <section id="workshop-chair">
+        <div class="container">
+            <h2>Workshop Chair</h2>
+            <div class="committee-grid">
+                <div class="committee-card">
+                    <h4>Haiwei Pan</h4>
+                    <div class="institution">Harbin Engineering University</div>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 2rem;">Program Committee Co-Chairs</h3>
+            <div class="committee-grid">
+                <div class="committee-card">
+                    <h4>Peng Li</h4>
+                    <div class="institution">Harbin Institute of Technology (Shenzhen)</div>
+                </div>
+                <div class="committee-card">
+                    <h4>Kejia Zhang</h4>
+                    <div class="institution">Harbin Engineering University</div>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 2rem;">Publication Co-Chairs</h3>
+            <div class="committee-grid">
+                <div class="committee-card">
+                    <h4>Linlin Gao</h4>
+                    <div class="institution">Ningbo University</div>
+                </div>
+                <div class="committee-card">
+                    <h4>Shuning He</h4>
+                    <div class="institution">Harbin Engineering University</div>
+                </div>
+            </div>
+            <h3 style="margin-top: 2rem;">Program Committee Members</h3>
+            <div class="committee-grid">
+                <div>
+                    <h4>Xixian Han</h4>
+                    <div class="institution">Harbin Institute of Technology (Weihai)</div>
+                </div>
+                <div>
+                    <h4>Yajun Yang</h4>
+                    <div class="institution">Tianjin University</div>
+                </div> 
+                <div>
+                    <h4>Jinbao Wang</h4>
+                    <div class="institution">Harbin Institute of Technology (Weihai)</div>
+                </div>
+                <div>
+                    <h4>Qianna Cui</h4>
+                    <div class="institution">China Three Gorges University</div>
+                </div>
+                <div>
+                    <h4>Linlin Gao</h4>
+                    <div class="institution">Ningbo University</div>
+            </div>
+                <div>
+                    <h4>Jian Guan</h4>
+                    <div class="institution">Harbin Engineering University</div>
+                </div>
+                <div>
+                    <h4>Yuhua Wang</h4>
+                    <div class="institution">Harbin Engineering University</div>
+            </div>
+                <div>
+                    <h4>Haiyan Lan</h4>
+                    <div class="institution">Harbin Engineering University</div>
+                </div>
+                <div>
+                    <h4>Haiying Jiang</h4>
+                    <div class="institution">Harbin Engineering University</div>
+            </div>
+                <div>
+                    <h4>Lan Zhang</h4>
+                    <div class="institution">Northeast Forestry University</div>
+                </div>
+                <div>
+                    <h4>Hongzhi Wang</h4>
+                    <div class="institution">Harbin Institute of Technology</div>
+            </div>
+                <div>
+                    <h4>Wei Zhang</h4>
+                    <div class="institution">Harbin Institute of Technology</div>
+                </div>
+                <div>
+                    <h4>Xiaoou Ding</h4>
+                    <div class="institution">Harbin Institute of Technology</div>
+            </div>
+                <div>
+                    <h4>Yong Liu</h4>
+                    <div class="institution">Heilongjiang University</div>
+                </div>
+                <div>
+                    <h4>Jinghua Zhu</h4>
+                    <div class="institution">Heilongjiang University</div>
+            </div>
+                <div>
+                    <h4>Shuguang Han</h4>
+                    <div class="institution">Zhejiang Sci-Tech University</div>
+                </div>  
+                <div>
+                    <h4>Mohan Li</h4>
+                    <div class="institution">Guangzhou University</div>
+            </div>
+                <div>
+                    <h4>Ran Bi</h4>
+                    <div class="institution">Dalian University of Technology</div>
+                </div>
+                <div>
+                    <h4>Jing Gao</h4>
+                    <div class="institution">Dalian University of Technology</div>
+            </div>
+                <div>
+                    <h4>Nianmin Yao</h4>
+                    <div class="institution">Dalian University of Technology</div>
+                </div>  
+                <div>
+                    <h4>Jing Yu</h4>
+                    <div class="institution">Yanshan University</div>
+            </div>
+                <div>
+                    <h4>Guanglu Sun</h4>
+                    <div class="institution">Harbin University of Science and Technology</div>
+                </div>
+                <div>
+                    <h4>Zhiqiang Zhang</h4>
+                    <div class="institution">Zhejiang University of Finance & Economics</div>
+            </div>
+                <div>
+                    <h4>Dan Yin</h4>
+                    <div class="institution">Beijing University of Civil Engineering and Architecture</div>
+                </div>  
+                <div>
+                    <h4>Gang Wang</h4>
+                    <div class="institution">University of Shanghai Science and Technology</div>
+            </div>
+                <div>
+                    <h4>Quanquan Liu</h4>
+                    <div class="institution">Shenzhen MSU-BIT University</div>
+                </div>
+                <a href="index.html" class="btn btn-primary">Back to Home</a>
+            </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">AIPL 2025</div>
+                <p>The International Workshop on AI for Personalized Learning</p>
+                <p>Advancing the future of education through artificial intelligence</p>
+                
+                <div class="footer-links">
+                    <a href="index.html">Introduction</a>
+                    <a href="index.html#call-for-papers">Call for Papers</a>
+                    <a href="#">Committee</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                
+                <div class="copyright">
+                    &copy; 2025 AIPL Workshop Committee. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
