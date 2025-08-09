@@ -385,24 +385,45 @@
         }
         
         @media (max-width: 480px) {
-            .nav-menu {
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .topics-container {
                 flex-direction: column;
-                align-items: center;
+            }
+            
+            .committee-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
             }
             
             .nav-item {
-                width: 100%;
-                text-align: center;
+                padding: 0 7px;
             }
             
             .nav-link {
-                padding: 10px;
+                padding: 15px 5px;
+                font-size: 0.9rem;
+            }
+            .date-location {
+                background: rgba(255, 255, 255, 0.2);
+                display: inline-block;
+                padding: 0.8rem 1.5rem;
+                border-radius: 30px;
+                font-weight: 600;
+                margin-top: 0.7rem;
+                backdrop-filter: blur(5px);
             }
             
-            .date-location {
-                font-size: 0.9rem;
-                padding: 0.6rem 1rem;
-            }
         }
     </style>
 </head>
